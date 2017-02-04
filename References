@@ -1,0 +1,28 @@
+Udacity Data Analyst Nanodegree
+P5: Identify Fraud from Enron Email
+Megan O'Neil
+2017-02-04
+
+References
+
+-	Stratified Shuffle Split: http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedShuffleSplit.html
+
+-	GridSearchCV: http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html
+
+-	Classification Report: http://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html,
+-	http://stats.stackexchange.com/questions/117654/what-does-the-numbers-in-the-classification-report-of-sklearn-mean
+
+-	f_classif: http://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_classif.html#sklearn.feature_selection.f_classif
+
+-	f1-score: https://www.kaggle.com/wiki/MeanFScore
+
+-	cross-validating: http://nbviewer.jupyter.org/github/jming/cs109/blob/master/lec_10_cross_val.ipynb
+
+-	Udacity forum posts to develop code:
+-	https://discussions.udacity.com/t/gridsearchcv-and-kfold-validation/32459/6
+-	https://discussions.udacity.com/t/dont-know-how-to-validate/201521
+-	https://discussions.udacity.com/t/feature-selection-vs-pca/34958
+-	https://discussions.udacity.com/t/valueerror-the-least-populated-class-in-y-has-only-1-member-which-is-too-few/44984
+-	https://discussions.udacity.com/t/final-project-order-of-pipeline-operation-with-minmaxscaler-and-svc/164802/2
+
+I hereby confirm that this submission is my work. I have cited above the origins of any parts of the submission that were taken from Websites, books, forums, blog posts, github repositories, etc.
