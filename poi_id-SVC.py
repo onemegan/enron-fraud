@@ -8,7 +8,7 @@ Created on Sun Jan 29 19:31:19 2017
 #!/usr/bin/python
 import os
 os.getcwd()
-os.chdir('C:/Dropbox/Pers/Courses/Nanodegree/P5_MachineLearning/ud120-projects/final_project')
+os.chdir('../final_project')
 
 import sys
 sys.path.append("../tools/")
@@ -29,12 +29,6 @@ from sklearn.cross_validation import train_test_split, cross_val_score, Stratifi
 from sklearn.metrics import classification_report, precision_recall_curve
 from sklearn.feature_selection import SelectKBest, chi2, f_classif
 from pprint import pprint
-
-
-import os
-os.getcwd()
-os.chdir('C:/Dropbox/Pers/Courses/Nanodegree/P5_MachineLearning/ud120-projects/final_project')
-
 
 ### STEP 1: SELECT FEATURES TO USE. ###
 
@@ -243,4 +237,4 @@ print(classification_report(labels_test, pred))
 
 ### STEP 6: GENERATE THE PICKLE FILES ###
 
-dump_classifier_and_data(clf, my_dataset, features_list)
+dump_classifier_and_data(clf.best_estimator_, my_dataset, features_list)

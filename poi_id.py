@@ -8,7 +8,9 @@ Created on Sun Jan 29 19:31:19 2017
 #!/usr/bin/python
 import os
 os.getcwd()
-os.chdir('C:/Dropbox/Pers/Courses/Nanodegree/P5_MachineLearning/ud120-projects/final_project')
+#os.chdir('C:/Dropbox/Pers/Courses/Nanodegree/P5_MachineLearning/ud120-projects/evaluation')
+#os.chdir('../P5_MachineLearning/ud120-projects/final_project')
+os.chdir('../final_project/')
 
 import sys
 sys.path.append("../tools/")
@@ -26,11 +28,6 @@ from sklearn.metrics import classification_report, precision_recall_curve
 from sklearn.feature_selection import SelectKBest, chi2, f_classif
 from pprint import pprint
 
-
-import os
-os.getcwd()
-os.chdir('C:/Dropbox/Pers/Courses/Nanodegree/P5_MachineLearning/ud120-projects/final_project')
-
 ### STEP 1: SELECT FEATURES TO USE. ###
 
 #Load the dictionary containing the dataset
@@ -39,8 +36,27 @@ with open("final_project_dataset.pkl", "r") as data_file:
 
 features_list = data_dict[data_dict.keys()[0]].keys()
 
+len(data_dict)
+len(features_list)
+
+data_dict[data_dict.keys()[0]]
+
+# Identify number and proportion of POIs
+poi_count = 0
+non_poi_count = 0
+for key in data_dict:
+    if data_dict[key]['poi'] == True:
+        poi_count += 1
+    if data_dict[key]['poi'] == False:
+        non_poi_count += 1
+
+poi_count
+non_poi_count
+float(poi_count)/(poi_count + non_poi_count)
+
+
 ### STEP 2: REMOVE OUTLIERS ###
-# Calculate the percnetage of NaNs in dataset for each feature
+# Calculate the percentage of NaNs in dataset for each feature
 def percent_nans(features_list):
     feature_nans = {}      
     for feature in features_list:
@@ -52,7 +68,18 @@ def percent_nans(features_list):
         ,2)
     return feature_nans
 print("NaN Percentages:")
-pprint(percent_nans(features_list))
+feature_nans = percent_nans(features_list)
+pprint(feature_nans)
+
+
+def high_nan_finder(percent_cutoff):
+    high_nans = {}    
+    for key in feature_nans:
+        if feature_nans[key] > percent_cutoff:
+            high_nans[key] = feature_nans[key]
+    return high_nans
+
+pprint(high_nan_finder(0.5))
 
 # Identify outliers of salary and bonus using visualization
 features = ["salary", "bonus"]
@@ -230,6 +257,7 @@ clf.fit(features_train, labels_train)
 # Get the selected features
 #https://discussions.udacity.com/t/how-to-find-out-the-features-selected-by-selectkbest/45118/8
 pipe.fit(features_train, labels_train)
+
 features_k= clf.best_params_['selectkbest__k']
 SKB_k=SelectKBest(f_classif, k=features_k)
 SKB_k.fit_transform(features_train,labels_train) # data used in gridsearch  
@@ -248,5 +276,4 @@ print(classification_report(labels_test, pred))
 
 
 ### STEP 6: GENERATE THE PICKLE FILES ###
-
-dump_classifier_and_data(clf, my_dataset, features_list)
+dump_classifier_and_data(clf.best_estimator_, my_dataset, features_list)
